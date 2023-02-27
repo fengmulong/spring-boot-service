@@ -1,3 +1,9 @@
+
+接触ssl 验证
+git config --global http.sslVerify false
+
+
+
 1.Controller
 
 ##定义初始变量
