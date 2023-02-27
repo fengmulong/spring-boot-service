@@ -3,8 +3,6 @@ package com.step.template.main.util;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author liyd
@@ -32,26 +30,9 @@ public class FileUtils {
                 String s = path.toLowerCase();
                 boolean b = s.endsWith(fileName);
                 if(b){
-                    SendZHibo(file);
-                    log.info("{}报表图片发送成功：",file.getName());
+                   //具體使用
                 }
             }
         }
-    }
-
-
-    public static void SendZHibo(File files) {
-        Map<String, File> fileMap = new HashMap();
-        log.info("excel源文件地址:{}", files.getPath());
-        File file=ExcelToPng.ConvertPng(files.getPath());
-        log.info("新文件地址:{}", file.getPath());
-        fileMap.put("file", file);
-        try {
-           // HttpClientUtils.doFormPostFileTryThreeTimes(RyWeChatUtil.pushwechat_url, file.getName(), fileMap);
-            log.info("{}报表生成图片 发送成功",file.getName());
-        } catch (Exception e) {
-            log.error("{}报表生成图片 发送失败",file.getName());
-        }
-
     }
 }

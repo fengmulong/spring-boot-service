@@ -1,5 +1,6 @@
 package com.step.template.main;
 
+import com.step.template.main.util.SSQUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -19,6 +20,8 @@ public class TemplateApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(TemplateApplication.class, args);
+        StringBuilder stringBuilder=new StringBuilder("abcdsd");
+        System.out.println(stringBuilder.reverse());
     }
 
     @Override
