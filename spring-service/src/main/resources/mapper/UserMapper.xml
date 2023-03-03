@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.step.template.main.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.step.template.main.vo.UserVo">
+<mapper namespace="com.lyd.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.lyd.vo.UserVo">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="deleted" jdbcType="INTEGER" property="deleted"/>
         <result column="createBy" jdbcType="VARCHAR" property="createBy"/>
@@ -13,13 +13,13 @@
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
-        <collection property="roles" ofType="com.step.template.main.entity.Role" columnPrefix="role_">
+        <collection property="roles" ofType="com.lyd.entity.Role" columnPrefix="role_">
             <id column="id" property="id"/>
             <result column="name" property="name"/>
         </collection>
     </resultMap>
 
-    <select id="selectWithPage" resultType="com.step.template.main.vo.UserVo">
+    <select id="selectWithPage" resultType="com.lyd.vo.UserVo">
         select u.*
         from user as u
         <where>
