@@ -1,3 +1,4 @@
+/*
 package com.lyd.util;
 
 import com.spire.pdf.FileFormat;
@@ -10,9 +11,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+*/
 /**
  * @author liyudong
- */
+ *//*
+
 public class PdfUtils {
 
     public static void ConvertToPng(String pdfFIlePath,String pngFilePath) {
@@ -39,3 +42,4 @@ public class PdfUtils {
         doc.close();
     }
 }
+*/

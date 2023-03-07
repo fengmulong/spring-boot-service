@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyd.mapper.LuckyBallMapper">
+ 
+    <resultMap type="com.lyd.entity.LuckyBallVO" id="LuckyBallVOMap">
+                    <result property="id" column="id" jdbcType="INTEGER"/>
+                    <result property="red1" column="red1" jdbcType="VARCHAR"/>
+                    <result property="red2" column="red2" jdbcType="VARCHAR"/>
+                    <result property="red3" column="red3" jdbcType="VARCHAR"/>
+                    <result property="red4" column="red4" jdbcType="VARCHAR"/>
+                    <result property="red5" column="red5" jdbcType="VARCHAR"/>
+                    <result property="red6" column="red6" jdbcType="VARCHAR"/>
+                    <result property="blue" column="blue" jdbcType="VARCHAR"/>
+                    <result property="time" column="time" jdbcType="VARCHAR"/>
+            </resultMap>
+ 
+ 
+    <!--分页查询-->
+    <select id="queryByPage" parameterType="com.lyd.entity.LuckyBallDTO" resultMap="LuckyBallVOMap">
+        SELECT
+            id, red1, red2, red3, red4, red5, red6, blue, time        
+        FROM lucky_ball
+        <where>
+                            <if test="param.id != null">
+                    AND id = param.#{id}
+                </if>
+                            <if test="param.red1 != null and param.red1 != ''">
+                    AND red1 = param.#{red1}
+                </if>
+                            <if test="param.red2 != null and param.red2 != ''">
+                    AND red2 = param.#{red2}
+                </if>
+                            <if test="param.red3 != null and param.red3 != ''">
+                    AND red3 = param.#{red3}
+                </if>
+                            <if test="param.red4 != null and param.red4 != ''">
+                    AND red4 = param.#{red4}
+                </if>
+                            <if test="param.red5 != null and param.red5 != ''">
+                    AND red5 = param.#{red5}
+                </if>
+                            <if test="param.red6 != null and param.red6 != ''">
+                    AND red6 = param.#{red6}
+                </if>
+                            <if test="param.blue != null and param.blue != ''">
+                    AND blue = param.#{blue}
+                </if>
+                            <if test="param.time != null and param.time != ''">
+                    AND time = param.#{time}
+                </if>
+                    </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    
+    <!--根据ID查详情-->
+    <select id="queryById" parameterType="long" resultMap="LuckyBallVOMap">
+        SELECT
+          id, red1, red2, red3, red4, red5, red6, blue, time        
+        FROM lucky_ball
+        WHERE id = #{id} LIMIT 1
+    </select>
+ 
+ 
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO lucky_ball(red1, red2, red3, red4, red5, red6, blue, time)
+        VALUES (#{red1}, #{red2}, #{red3}, #{red4}, #{red5}, #{red6}, #{blue}, #{time})
+    </insert>
+    
+ 
+    <!--通过主键修改数据-->
+    <update id="update">
+        UPDATE lucky_ball
+        <set>
+            <if test="red1 != null and red1 != ''">
+                red1 = #{red1},
+            </if>
+            <if test="red2 != null and red2 != ''">
+                red2 = #{red2},
+            </if>
+            <if test="red3 != null and red3 != ''">
+                red3 = #{red3},
+            </if>
+            <if test="red4 != null and red4 != ''">
+                red4 = #{red4},
+            </if>
+            <if test="red5 != null and red5 != ''">
+                red5 = #{red5},
+            </if>
+            <if test="red6 != null and red6 != ''">
+                red6 = #{red6},
+            </if>
+            <if test="blue != null and blue != ''">
+                blue = #{blue},
+            </if>
+            <if test="time != null and time != ''">
+                time = #{time},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+ 
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        DELETE FROM lucky_ball WHERE id = #{id} 
+    </delete>
+ 
+</mapper>

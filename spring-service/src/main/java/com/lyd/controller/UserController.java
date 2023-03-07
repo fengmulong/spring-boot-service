@@ -3,7 +3,6 @@ package com.lyd.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lyd.config.annotation.NoAuth;
 import com.lyd.entity.User;
-import com.lyd.service.Test;
 import com.lyd.svo.UserSvo;
 import com.lyd.util.Constant;
 import com.lyd.vo.UserVo;
@@ -23,8 +22,6 @@ public class UserController {
 
     private final UserService userService;
 
-    Test test;
-
     @Auth("user:query")
     @ApiOperation("获取列表")
     @GetMapping
@@ -37,7 +34,6 @@ public class UserController {
     @ApiOperation("获取详情")
     @GetMapping("{id}")
     public UserVo selectByPrimaryKey(@PathVariable Integer id) {
-        test.helloWord();
         return userService.getVoById(id);
     }
 
