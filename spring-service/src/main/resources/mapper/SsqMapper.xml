@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyd.mapper.SsqMapper">
+ 
+    <resultMap type="com.lyd.entity.SsqVO" id="SsqVOMap">
+                    <result property="id" column="id" jdbcType="INTEGER"/>
+                    <result property="numRed1" column="num_red1" jdbcType="INTEGER"/>
+                    <result property="numRed2" column="num_red2" jdbcType="INTEGER"/>
+                    <result property="numRed3" column="num_red3" jdbcType="INTEGER"/>
+                    <result property="numRed4" column="num_red4" jdbcType="INTEGER"/>
+                    <result property="numRed5" column="num_red5" jdbcType="INTEGER"/>
+                    <result property="numRed6" column="num_red6" jdbcType="INTEGER"/>
+                    <result property="numBlue" column="num_blue" jdbcType="INTEGER"/>
+                    <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+                    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+                    <result property="status" column="status" jdbcType="VARCHAR"/>
+            </resultMap>
+ 
+ 
+    <!--分页查询-->
+    <select id="queryByPage" parameterType="com.lyd.entity.SsqDTO" resultMap="SsqVOMap">
+        SELECT
+            id, num_red1, num_red2, num_red3, num_red4, num_red5, num_red6, num_blue, create_user, create_time, status        
+        FROM ssq
+        <where>
+                            <if test="param.id != null">
+                    AND id = param.#{id}
+                </if>
+                            <if test="param.numRed1 != null">
+                    AND num_red1 = param.#{numRed1}
+                </if>
+                            <if test="param.numRed2 != null">
+                    AND num_red2 = param.#{numRed2}
+                </if>
+                            <if test="param.numRed3 != null">
+                    AND num_red3 = param.#{numRed3}
+                </if>
+                            <if test="param.numRed4 != null">
+                    AND num_red4 = param.#{numRed4}
+                </if>
+                            <if test="param.numRed5 != null">
+                    AND num_red5 = param.#{numRed5}
+                </if>
+                            <if test="param.numRed6 != null">
+                    AND num_red6 = param.#{numRed6}
+                </if>
+                            <if test="param.numBlue != null">
+                    AND num_blue = param.#{numBlue}
+                </if>
+                            <if test="param.createUser != null and param.createUser != ''">
+                    AND create_user = param.#{createUser}
+                </if>
+                            <if test="param.createTime != null">
+                    AND create_time = param.#{createTime}
+                </if>
+                            <if test="param.status != null and param.status != ''">
+                    AND status = param.#{status}
+                </if>
+                    </where>
+        ORDER BY create_time DESC
+    </select>
+    
+    
+    <!--根据ID查详情-->
+    <select id="queryById" parameterType="long" resultMap="SsqVOMap">
+        SELECT
+          id, num_red1, num_red2, num_red3, num_red4, num_red5, num_red6, num_blue, create_user, create_time, status        
+        FROM ssq
+        WHERE id = #{id} LIMIT 1
+    </select>
+   
+     <!--新增实体属性不为null的列-->
+    <insert id="insertSelect" keyProperty="id" useGeneratedKeys="true" parameterType="com.lyd.entity.Ssq">
+        insert into ssq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="numRed1 != null">
+             num_red1,
+          </if>
+          <if test="numRed2 != null">
+             num_red2,
+          </if>
+          <if test="numRed3 != null">
+             num_red3,
+          </if>
+          <if test="numRed4 != null">
+             num_red4,
+          </if>
+          <if test="numRed5 != null">
+             num_red5,
+          </if>
+          <if test="numRed6 != null">
+             num_red6,
+          </if>
+          <if test="numBlue != null">
+             num_blue,
+          </if>
+          <if test="createUser != null">
+             create_user,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="numRed1 != null">
+             #{numRed1,jdbcType=INTEGER},
+          </if>
+          <if test="numRed2 != null">
+             #{numRed2,jdbcType=INTEGER},
+          </if>
+          <if test="numRed3 != null">
+             #{numRed3,jdbcType=INTEGER},
+          </if>
+          <if test="numRed4 != null">
+             #{numRed4,jdbcType=INTEGER},
+          </if>
+          <if test="numRed5 != null">
+             #{numRed5,jdbcType=INTEGER},
+          </if>
+          <if test="numRed6 != null">
+             #{numRed6,jdbcType=INTEGER},
+          </if>
+          <if test="numBlue != null">
+             #{numBlue,jdbcType=INTEGER},
+          </if>
+          <if test="createUser != null">
+             #{createUser,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+        </trim>
+    </insert>
+ 
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into ssq
+         (id, num_red1, num_red2, num_red3, num_red4, num_red5, num_red6, num_blue, create_user, create_time, status)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (#{item.id}, #{item.numRed1}, #{item.numRed2}, #{item.numRed3}, #{item.numRed4}, #{item.numRed5}, #{item.numRed6}, #{item.numBlue}, #{item.createUser}, #{item.createTime}, #{item.status})
+        </foreach>
+    </insert>
+
+    <!--新增所有列-->
+    <insert id="insertOne" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO ssq(num_red1, num_red2, num_red3, num_red4, num_red5, num_red6, num_blue, create_user, create_time, status)
+        VALUES (#{numRed1}, #{numRed2}, #{numRed3}, #{numRed4}, #{numRed5}, #{numRed6}, #{numBlue}, #{createUser}, #{createTime}, #{status})
+    </insert>
+    
+ 
+    <!--通过主键修改数据-->
+    <update id="update">
+        UPDATE ssq
+        <set>
+            <if test="numRed1 != null">
+                num_red1 = #{numRed1},
+            </if>
+            <if test="numRed2 != null">
+                num_red2 = #{numRed2},
+            </if>
+            <if test="numRed3 != null">
+                num_red3 = #{numRed3},
+            </if>
+            <if test="numRed4 != null">
+                num_red4 = #{numRed4},
+            </if>
+            <if test="numRed5 != null">
+                num_red5 = #{numRed5},
+            </if>
+            <if test="numRed6 != null">
+                num_red6 = #{numRed6},
+            </if>
+            <if test="numBlue != null">
+                num_blue = #{numBlue},
+            </if>
+            <if test="createUser != null and createUser != ''">
+                create_user = #{createUser},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+ 
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        DELETE FROM ssq WHERE id = #{id} 
+    </delete>
+ 
+</mapper>
