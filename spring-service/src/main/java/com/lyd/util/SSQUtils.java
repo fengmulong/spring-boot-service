@@ -14,6 +14,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,5 +51,39 @@ public class SSQUtils {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        List<String> list= Arrays.asList("05","04","03","09","03","14");
+        numberContent(list);
+    }
+    public static int numberContent(List<String> ErPoints){
+        for(int i=0;i<ErPoints.size();i++){
+            ErPoints.set(i,String.format("%04d", Integer.parseInt(ErPoints.get(i))));
+        }
+        List<String> 二进制=new ArrayList<>();
+        for(int i=0;i<ErPoints.size();i++){
+            if(i==ErPoints.size()-1){
+                break;
+            }
+            int j=i+1;
+            StringBuffer stringBuffer=new StringBuffer("");
+            char[] er1=ErPoints.get(i).toCharArray();
+            char[] er2=ErPoints.get(j).toCharArray();
+            for(int t=0;t<er1.length;t++){
+                if(er1[t]==er2[t]){
+                    stringBuffer.append("1");
+                }else{
+                    stringBuffer.append("0");
+                }
+            }
+            二进制.add(stringBuffer.toString());
+        }
+        StringBuffer  str=new StringBuffer("");
+        for(String da:二进制) {
+            str.append(Integer.parseInt(da,2)-1+",");
+        }
+        System.out.println(str);
+        return 0;
     }
 }
