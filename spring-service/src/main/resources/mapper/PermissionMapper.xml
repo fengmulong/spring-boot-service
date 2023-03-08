@@ -3,13 +3,13 @@
 <mapper namespace="com.lyd.mapper.PermissionMapper">
 
     <!-- 查询某个用户拥有的权限 -->
-    <select id="selectByUserId" resultType="String">
+    <select id="selectByUserId" resultType="java.lang.String">
         select distinct P.code
         from permission P
-                 left join role_permission RP on RP.permissionId = P.id
-                 left join role R on R.id = RP.roleId
-                 left join user_role UR on UR.roleId = R.id
-                 left join user U on U.id = UR.userId
+                 left join role_permission RP on RP.permission_id = P.id
+                 left join role R on R.id = RP.role_id
+                 left join user_role UR on UR.role_id = R.id
+                 left join user U on U.id = UR.user_id
         where U.id = #{userId}
     </select>
 </mapper>

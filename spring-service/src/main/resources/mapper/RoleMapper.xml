@@ -20,8 +20,8 @@
                permission.code as permission_code,
                permission.name as permission_name
         from role
-                 left join role_permission rolePermission on role.id = rolePermission.roleId
-                 left join permission on permission.id = rolePermission.permissionId
+                 left join role_permission rolePermission on role.id = rolePermission.role_id
+                 left join permission on permission.id = rolePermission.permission_id
         where role.id = #{id}
     </select>
 
@@ -29,7 +29,7 @@
     <insert id="insertRolePermission">
         insert into
         role_permission
-        (roleId, permissionId)
+        (role_id, permission_id)
         values
         <foreach collection="permissions" item="permission" separator=",">
             ( #{roleId},#{permission.id} )
@@ -40,6 +40,6 @@
     <delete id="deleteRolePermission" parameterType="int">
         delete
         from role_permission
-        where permissionId = #{roleId}
+        where permission_id = #{roleId}
     </delete>
 </mapper>

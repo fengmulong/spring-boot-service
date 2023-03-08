@@ -3,6 +3,6 @@ server:
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-            password: Admin@123
-            url: jdbc:mysql://10.20.80.102:3306/lyd?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-            username: root
+        password: Admin@123
+        url: jdbc:mysql://10.20.80.102:3306/lyd?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+        username: root

@@ -40,8 +40,8 @@
                r.id   as role_id,
                r.name as role_name
         from user u
-                 left join user_role ur on u.id = ur.userId
-                 left join role r on r.id = ur.roleId
+                 left join user_role ur on u.id = ur.user_id
+                 left join role r on r.id = ur.role_id
         where u.id = #{id}
     </select>
 
@@ -49,7 +49,7 @@
     <insert id="insertUserRole">
         insert into
         user_role
-        (userId, roleId)
+        (user_id, role_id)
         values
         <foreach collection="roles" item="role" separator=",">
             ( #{userId},#{role.id} )
@@ -60,6 +60,6 @@
     <delete id="deleteUserRole" parameterType="int">
         delete
         from user_role
-        where userId = #{userId}
+        where user_id = #{userId}
     </delete>
 </mapper>

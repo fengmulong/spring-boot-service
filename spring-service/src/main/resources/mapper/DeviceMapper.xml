@@ -4,7 +4,7 @@
 
     <select id="selectWithPage" resultType="com.lyd.vo.DeviceVo">
         select d.*,u.name as maintUserName
-        from device d left join user u on d.maintUserId = u.id
+        from device d left join user u on d.maint_user_id = u.id
         <where>
             <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(svo.no)">
                 and d.no like CONCAT('%',#{svo.no},'%')
